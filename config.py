@@ -1,0 +1,2 @@
+QR_BASE_FOLDER = "qr_codes"
+RELOAD_TIME = 10
