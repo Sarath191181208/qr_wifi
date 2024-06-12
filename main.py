@@ -1,7 +1,7 @@
 import os
-import socket
+from datetime import datetime
 
-from flask import Flask, render_template, request
+from flask import Flask, Response, render_template, request
 from generate_qr import create_qr, get_qr_path, save_qr
 
 import logging
@@ -18,7 +18,7 @@ app.secret_key = os.environ.get("FN_FLASK_SECRET_KEY", default=False)
 # This is the list to track the students who are marked present
 student_marked_list = list()
 # This is ip list to track the ip address of the students
-ip_list = list() 
+ip_list = list()
 
 
 @app.route("/")
@@ -36,11 +36,11 @@ def index():
     link = f"http://{IPAddr}:5000/markPresent"
     # hotspot_qr = generate_login_qr()
     hotspot_qr = create_qr(link)
-    hotspot_path = get_qr_path('ht.png')
+    hotspot_path = get_qr_path("ht.png")
     save_qr(hotspot_qr, hotspot_path)
 
     mark_present_qr = create_qr(link)
-    mark_present_qr_path = get_qr_path('qr.png')
+    mark_present_qr_path = get_qr_path("qr.png")
     save_qr(mark_present_qr, mark_present_qr_path)
 
     return render_template("showQR.html", qr1_path="ht.png", qr2_path="qr.png")
@@ -69,7 +69,7 @@ def markPresent():
                 url=url,
             )
 
-        student_data = student_data.capitalize()
+        student_data = student_data.upper()
 
         # check if the student is already marked present
         if student_data in student_marked_list:
@@ -114,6 +114,20 @@ def markPresent():
         error_message=error_message,
         advice_message=advice_message,
         url=url,
+    )
+
+
+@app.route("/download")
+def download():
+    csv_text = "\n".join(student_marked_list)
+    current_datetime = datetime.now()
+
+    # Format the date and time
+    curr_date = current_datetime.strftime("%d-%m-%Y-%H:%M")
+    return Response(
+        csv_text,
+        mimetype="text/csv",
+        headers={"Content-disposition": f"attachment; filename=attendance{curr_date}.csv"},
     )
 
 
