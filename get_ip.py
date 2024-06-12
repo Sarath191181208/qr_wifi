@@ -10,5 +10,3 @@ def get_ip():
     finally:
         s.close()
     return IP
-
-print(get_ip())
