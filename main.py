@@ -83,7 +83,7 @@ def markPresent():
             )
 
         # check if the student is ip list
-        if student_data in ip_list:
+        if user_ip in ip_list:
             error_message = "Cannot mark the student present"
             advice_message = "Invalid can't mark twice"
             url = "/markPresent"
