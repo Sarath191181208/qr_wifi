@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beautiful QR Code Page</title>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      /* Soft blue and lavender gradient */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      /* Full viewport height */
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 2rem;
+    }
+
+    .qr-codes {
+      display: flex;
+      justify-content: space-between;
+      /* Space between QR codes */
+      width: 50%;
+      max-width: 400px;
+      /* Limit total width */
+    }
+
+    .qr-code {
+      border-radius: 10px;
+      /* Rounded corners */
+      padding: 1rem;
+      margin: 0 1rem;
+      /* Spacing between QR codes */
+    }
+
+    .qr-code img {
+      width: 150px;
+      /* Adjust QR code size as needed */
+      height: 150px;
+    }
+
+    .qr-code p {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .btn {
+      background-color: #4caf50;
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>QR Code Showcase</h1>
+    <div class="qr-codes">
+      <div class="qr-code">
+          <img src="{{url_for('static', filename=qr1_path)}}" alt="QR Code 1" />
+        <p>Scan to connect to wifi</p>
+      </div>
+      <div class="qr-code">
+          <img src="{{url_for('static', filename=qr2_path)}}" alt="QR Code 2" />
+        <p>Scan to mark your attendance</p>
+      </div>
+    </div>
+    <button class="btn">Download as CSV</button>
+  </div>
+</body>
+
+</html>

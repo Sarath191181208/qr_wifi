@@ -3,6 +3,7 @@ from qrcode.main import QRCode
 from qrcode.constants import ERROR_CORRECT_L
 from config import QR_BASE_FOLDER
 
+
 def create_qr(link: str) -> QRCode:
     """
     Create a QR code
@@ -21,20 +22,20 @@ def create_qr(link: str) -> QRCode:
     qr.make(fit=True)
 
     # img = qr.make_image(fill_color="purple", back_color="black")
-    img = qr.make_image()
-
-    qr_img_path = get_qr_path()
-    img.save(qr_img_path)
-
+    # save_image(qr, get_qr_path())
     return qr
 
-def get_qr_path() -> str:
+
+def save_qr(qr: QRCode, path: str) -> None:
+    img = qr.make_image()
+    img.save(path)
+
+def get_qr_path(filename: str) -> str:
     """
     Get the path of the QR code
-    @param None
     """
     base_path = os.path.split(__file__)[0]
-    path = os.path.join(base_path,"static",QR_BASE_FOLDER, "qr.png")
+    path = os.path.join(base_path, "static", QR_BASE_FOLDER, filename)
     return path
 
 
@@ -46,11 +47,13 @@ def create_random_str(length: int) -> str:
     """
     import random
     import string
-    return ''.join(random.choice(
-        string.ascii_letters+string.digits
-    ) for _ in range(length))
 
-def create_hash()->str:
+    return "".join(
+        random.choice(string.ascii_letters + string.digits) for _ in range(length)
+    )
+
+
+def create_hash() -> str:
     """
     Create a hash of the current time
     """
