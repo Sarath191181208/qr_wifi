@@ -6,6 +6,8 @@ from generate_qr import create_qr, get_qr_path, save_qr
 
 import logging
 
+from hotspot import generate_login_qr
+
 hostname = socket.gethostname()
 IPAddr = socket.gethostbyname(hostname)
 logging.basicConfig(filename="flask_log.log", level=logging.DEBUG)
@@ -31,7 +33,8 @@ def index():
             url="/markPresent",
         )
 
-    link = f"http://{IPAddr}:5000/"
+    link = f"http://{IPAddr}:5000/markPresent"
+    # hotspot_qr = generate_login_qr()
     hotspot_qr = create_qr(link)
     hotspot_path = get_qr_path('ht.png')
     save_qr(hotspot_qr, hotspot_path)
