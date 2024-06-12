@@ -69,6 +69,8 @@ def markPresent():
                 url=url,
             )
 
+        student_data = student_data.capitalize()
+
         # check if the student is already marked present
         if student_data in student_marked_list:
             error_message = "Cannot mark the student present"
