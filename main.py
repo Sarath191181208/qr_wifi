@@ -6,10 +6,10 @@ from generate_qr import create_qr, get_qr_path, save_qr
 
 import logging
 
+from get_ip import get_ip
 from hotspot import generate_login_qr
 
-hostname = socket.gethostname()
-IPAddr = socket.gethostbyname(hostname)
+IPAddr = get_ip()
 logging.basicConfig(filename="flask_log.log", level=logging.DEBUG)
 
 app = Flask(__name__)
