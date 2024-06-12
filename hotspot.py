@@ -1,4 +1,5 @@
 import subprocess
+from qrcode.main import QRCode
 import wifi_qrcode_generator
 
 def get_wifi_credentials_windows() -> tuple[str, str]:
@@ -29,8 +30,8 @@ def get_wifi_credentials_windows() -> tuple[str, str]:
     print("Password :", pass_results)
     return (id_results, pass_results)
 
+def generate_login_qr() -> QRCode:
+    id_results, pass_results = get_wifi_credentials_windows()
+    return wifi_qrcode_generator.wifi_qrcode(id_results, False, "WPA", pass_results)
 
-# id_results, pass_results = get_wifi_credentials_windows()
-id_results = "Sarath"
-pass_results = "nivasSri"
-wifi_qrcode_generator.wifi_qrcode(id_results, False, "WPA", pass_results).print_tty()
+
