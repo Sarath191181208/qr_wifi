@@ -55,7 +55,7 @@ def markPresent():
     if request.method == "POST":
         # reading the student data
         logging.info(request.form)
-        student_data = request.form.get("student_id")
+        student_data = request.form.get("student_id", None)
         # if student data is not provided
         if not student_data:
             error_message = "Student ID not provided"
